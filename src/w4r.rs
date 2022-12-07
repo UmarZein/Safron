@@ -1,7 +1,7 @@
 use serenity::{
     //collector::EventCollector,
-    model::{channel::Message, prelude::ReactionType},
-    prelude::*,
+    model::{channel::Message, prelude::{ReactionType, MessageReaction}},
+    prelude::*, utils::CustomMessage,
 };
 use std::{time::Duration, ops::Deref};
 use tokio::sync::Mutex;
@@ -18,6 +18,8 @@ pub async fn handle(msg: Message, ctx: &Context) {
     let react_msg = msg.reply(&ctx, "react with something!").await.unwrap();
     // let rm_clone = react_msg.clone();
     // let ctx = Arc::new(ctx);
+    // let t_u = ReactionType::try_from("👍").unwrap();
+    // let t_d = ReactionType::try_from("👎").unwrap();
     let t1 = tokio::spawn(
         react(
             Arc::new(Mutex::new(ctx.clone())), 
@@ -25,6 +27,7 @@ pub async fn handle(msg: Message, ctx: &Context) {
             Arc::new(Mutex::new(ReactionType::try_from("👍").unwrap()))
         )
     );
+    println!("t1 spawned");
     let t2 = tokio::spawn(
         react(
             Arc::new(Mutex::new(ctx.clone())), 
@@ -32,6 +35,7 @@ pub async fn handle(msg: Message, ctx: &Context) {
             Arc::new(Mutex::new(ReactionType::try_from("👎").unwrap()))
         )
     );
+    println!("t2 spawned");
     // let t1 = tokio::spawn(
     //     rm_clone.lock().await.react(ctx.clone(), ReactionType::try_from("👍").unwrap())
     // );

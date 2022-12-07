@@ -660,6 +660,11 @@ dependencies = [
 ]
 
 [[package]]
+name = "logmat"
+version = "0.1.0"
+source = "git+https://github.com/UmarZein/logmat#c80e810a852b63c2e165fbcce3cfeacf7913f779"
+
+[[package]]
 name = "mac"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1226,6 +1231,7 @@ dependencies = [
  "chrono",
  "dotenv",
  "json",
+ "logmat",
  "reqwest",
  "serde_json",
  "serenity",
